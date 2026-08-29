@@ -54,6 +54,7 @@ module top(
     localparam CUSTOM_VSYNC_PULSE_START = 10;
     localparam CUSTOM_VSYNC_PULSE_SIZE  = 5;
     localparam CUSTOM_INVERT  = 0;
+    localparam CUSTOM_VIDEO_RATE = 25.2E6;
 
     hdmi #(
         .DVI_OUTPUT(1'b0),                 
@@ -70,8 +71,8 @@ module top(
         .CUSTOM_VSYNC_PULSE_START(CUSTOM_VSYNC_PULSE_START),     
         .CUSTOM_VSYNC_PULSE_SIZE(CUSTOM_VSYNC_PULSE_SIZE),
         .CUSTOM_INVERT(CUSTOM_INVERT),               
-        .CUSTOM_VIDEO_RATE(25.175E6),      
-        .CUSTOM_BIT_WIDTH(10),             
+        .CUSTOM_VIDEO_RATE(CUSTOM_VIDEO_RATE),   
+        .CUSTOM_BIT_WIDTH(10),
         .CUSTOM_BIT_HEIGHT(10)             
     ) hdmi_inst (
         .clk_pixel_x5(clk_126),
