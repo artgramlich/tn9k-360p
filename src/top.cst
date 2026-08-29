@@ -1,0 +1,17 @@
+// Physical 27.000 MHz oscillator
+IO_LOC "clk_27" 52;
+IO_PORT "clk_27" IO_TYPE=LVCMOS33 PULL_MODE=UP;
+
+// Reset button
+IO_LOC  "rst_n" 4;
+IO_PORT "rst_n" IO_TYPE=LVCMOS18 PULL_MODE=UP;
+
+// HDMI
+IO_LOC "hdmi_clk_p" 69;
+IO_PORT "hdmi_clk_p" IO_TYPE=LVCMOS33D PULL_MODE=NONE DRIVE=8;
+IO_LOC "hdmi_data_p[0]" 71;
+IO_PORT "hdmi_data_p[0]" IO_TYPE=LVCMOS33D PULL_MODE=NONE DRIVE=8;
+IO_LOC "hdmi_data_p[1]" 73;
+IO_PORT "hdmi_data_p[1]" IO_TYPE=LVCMOS33D PULL_MODE=NONE DRIVE=8;
+IO_LOC "hdmi_data_p[2]" 75;
+IO_PORT "hdmi_data_p[2]" IO_TYPE=LVCMOS33D PULL_MODE=NONE DRIVE=8;

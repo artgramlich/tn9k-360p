@@ -1,0 +1,9 @@
+# Gowin EDA / FPGA Designer generated folders
+/impl/
+*.gprj.user
+
+# Backups and temporary files
+*.bak
+*~
+.#*
+
