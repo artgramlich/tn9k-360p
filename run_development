@@ -1,2 +1,0 @@
-#!/bin/sh
-openFPGALoader -b tangnano9k impl/pnr/tn9k360p-development.fs

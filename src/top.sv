@@ -53,8 +53,9 @@ module top(
     localparam CUSTOM_HSYNC_PULSE_SIZE  = 120;
     localparam CUSTOM_VSYNC_PULSE_START = 10;
     localparam CUSTOM_VSYNC_PULSE_SIZE  = 5;
-    localparam CUSTOM_INVERT  = 0;
-    localparam CUSTOM_VIDEO_RATE = 25.2E6;
+    localparam CUSTOM_INVERT            = 0;
+    localparam CUSTOM_VIDEO_RATE        = 25200000; 
+
 
     hdmi #(
         .DVI_OUTPUT(1'b0),                 
@@ -103,20 +104,24 @@ module top(
     // ============================================================
     logic [7:0]  audio_sweep = 8'd0;
     logic [15:0] audio_phase = 16'd0;
+    logic [7:0]  frame_color_offset = 8'd0;
     always_ff @(posedge clk_pixel) begin
         if (!clocks_locked) begin
             rgb_data    <= 24'h000000;
             audio_sweep <= 8'd0;
             audio_phase <= 16'd0;
+            frame_color_offset <= 8'd0;
         end else begin
-            rgb_data <= { x[7:0], y[7:0], 8'hFF }; 
+            rgb_data <= { (x[7:0] + frame_color_offset), y[7:0], 8'hFF }; 
             if (x == 0 && y == 0) begin
-                audio_sweep <= audio_sweep + 1'b1; // Steps up the pitch 60 times a second
+                audio_sweep <= audio_sweep + 1'b1;
+                frame_color_offset <= frame_color_offset + 1'b1;
             end
             audio_phase <= audio_phase + audio_sweep;
         end
     end
     assign audio_data_left  = audio_phase[15] ? 16'sd4000 : -16'sd4000;
     assign audio_data_right = audio_phase[15] ? -16'sd4000 : 16'sd4000; // Inverted for stereo separation
+
 
 endmodule

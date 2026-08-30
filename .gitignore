@@ -1,3 +1,6 @@
+/sim
+/tmp/
+
 # Gowin EDA / FPGA Designer generated folders
 /impl/
 *.gprj.user
