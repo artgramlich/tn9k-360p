@@ -21,6 +21,8 @@ SDL2_LIBS   = $(shell pkg-config --libs sdl2)
 help:
 	@echo "sim"
 	@echo "  Create a Veriloator simulation ./sim"
+	@echo "build"
+	@echo "  Build the bitstream"
 	@echo "configure-fpga"
 	@echo "  Upload the bitstream to the fpga volatile storage"  
 	@echo "clean"
@@ -43,9 +45,17 @@ sim:
 		"$(SDL2_CFLAGS)" -LDFLAGS "$(SDL2_LIBS)"
 	$(MAKE) -C ./tmp/verilator -f Vtop.mk
 
+.PHONY: build
+build:
+	@gw_sh < gowin-build.tcl 
+
 .PHONY: configure-fpga
 configure-fpga:
-	openFPGALoader -b tangnano9k impl/pnr/tn9k360p-development.fs
+	@openFPGALoader -b tangnano9k impl/pnr/tn9k360p-development.fs
+
+.PHONY: flash-fpga
+flash-fpga:
+	@openFPGALoader -b tangnano9k -f impl/pnr/tn9k360p-development.fs
 
 .PHONY: clean
 clean:
